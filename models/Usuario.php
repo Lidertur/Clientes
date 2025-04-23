@@ -5,7 +5,7 @@
     require_once 'bd/Database.php';
 
     class Usuario {
-        private $Usuario;
+        private $usuario;
         private $id_U;
         private $documento;
         private $nombre;
@@ -20,7 +20,7 @@
         private $id_C;
 
         public function __construct() {
-            $this->Usuario = basedeDatos::conectar();
+            $this->usuario = basedeDatos::conectar();
         }
         // Getters and setters
         public function getid_U() { return $this->id_U; }
@@ -48,4 +48,25 @@
         public function setzona(string $zona) { $this->zona = $zona; }
         public function setpsl(string $psl) { $this->psl = $psl; }
         public function setid_C(string $id_C) { $this->id_C = $id_C; }
+
+        public function obtener(){
+            try{
+                $consulta = $this->usuario->prepare("SELECT * from usuario;");
+                $consulta->execute();
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            }catch (exception $e){
+                die ($e->getMessage());
+            }
+        }
+        public function listar(){
+            try{
+                $consulta = $this->usuario->prepare("SELECT * from usuario;");
+                $consulta->execute();
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            }catch (exception $e){
+                die ($e->getMessage());
+            }
+        }
+
+
     }

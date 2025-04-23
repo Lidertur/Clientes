@@ -110,7 +110,7 @@
                                 </div>                             
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$p->getNombre();?>" pattern="[a-zA-Z\s]+" required>
+                                    <input type="text" class="form-control" name="nombre" id="nombre"placeholder="Nombre" value="<?=$p->getNombre();?>" pattern="[a-zA-Z\s]+" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label">Apellido</label>
@@ -123,32 +123,29 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="correo" class="form-label">Correo</label>
-                                    <input type="text" class="form-control" name="correo" id="correo" value="<?=$p->getcorreo(); ?>" required>
+                                    <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo" value="<?=$p->getcorreo(); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label">direccion</label>
-                                    <input type="text" class="form-control" name="direccion" id="direccion" value="<?= $p->getdireccion(); ?>" required>
+                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Direccion" value="<?= $p->getdireccion(); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="cargo" class="form-label">Cargo</label>
-                                    <input type="tex" class="form-control" name="cargo" id="cargo" value="<?= $p->getcargo(); ?>" required>
+                                    <input type="tex" class="form-control" name="cargo" id="cargo"placeholder="Cargo" value="<?= $p->getcargo(); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="base" class="form-label">Base</label>
-                                    <input type="text" class="form-control" name="base" id="base" value="<?= $p->getbase(); ?>" required>
+                                    <input type="text" class="form-control" name="base" id="base" placeholder="Base" value="<?= $p->getbase(); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="zona" class="form-label">Zona</label>
-                                    <input type="text" class="form-control" name="zona" id="zona" value="<?= $p->getzona(); ?>" required>
+                                    <input type="text" class="form-control" name="zona" id="zona" placeholder="Zona" value="<?= $p->getzona(); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="psl" class="form-label">PSL</label>
-                                    <input type="text" class="form-control" name="psl" id="psl" value="<?= $p->getpsl(); ?>" required>
+                                    <input type="text" class="form-control" name="psl" id="psl" placeholder="PSL" value="<?= $p->getpsl(); ?>" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="id_C" class="form-label">CLIENTE</label>
-                                    <input type="text" class="form-control" name="id_C" id="id_C" value="<?= $p->getid_C(); ?>" required>
-                                </div>
+
                                 <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Usuario</button>
                                 <a class="btn btn-dark w-100" href="?c=conductor" >Volver al inventario</a>
                             </form>

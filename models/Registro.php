@@ -5,7 +5,7 @@
     require_once 'bd/Database.php';
 
     class Registro {
-        private $Registro;
+        private $registro;
         private $id_RE;
         private $fecha;
         private $hora;
@@ -16,7 +16,7 @@
 
 
         public function __construct() {
-            $this->Registro = basedeDatos::conectar();
+            $this->registro = basedeDatos::conectar();
         }
         // Getters and setters
         public function getid_RE() { return $this->id_RE; }
@@ -34,4 +34,15 @@
         public function setid_U(string $id_U) { $this->id_U = $id_U; }
         public function setid_R(string $id_R) { $this->id_R = $id_R; }
         public function setid_M(string $id_M) { $this->id_M = $id_M; }
+
+        public function listar(){
+            try{
+                $consulta =$this->registro->prepare("SELECT RE.*,R.nombre AS nombre_ruta, M.N_movil, M.placa, U.nombre AS nombre_usuario, U.apellido, U.psl AS PSL
+FROM registro RE INNER JOIN ruta R ON RE.id_R = R.id_R INNER JOIN movil M ON RE.id_M = M.id_M INNER JOIN usuario U ON RE.id_U = U.id_U;");
+                $consulta->execute();
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            }catch (exception $e){
+                die ($e->getMessage());
+            }
+        }
     }

@@ -1,9 +1,10 @@
 <?php
-    /*     session_start();
+           /* session_start();
     if (!isset($_SESSION['user'])) {
         header('Location: ?c=login'); // Si no está autenticado, redirigir al login
         exit;
-    }
+    } 
+
     if ($_SESSION['role'] !== 'Administrador') {
         header('Location: ?c=login'); // Si no es admin, redirigir a la página de móvil
         exit;
@@ -50,9 +51,11 @@
                         <img src="img/Logo.png" alt="Logo" class="img-fluid " style="max-width: 100px;">
                     </div>
                     <div class="card-body text-center">
-                        <h1 class="card-title text-success mb-4">Bienvenida Ruta</h1>
+                        <h1 class="card-title text-success mb-4">
+                            Bienvenido Ruta <?= htmlspecialchars($rutaSeleccionada); ?> - Móvil <?= htmlspecialchars($movilSeleccionado); ?>
+                        </h1>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="movil" name="movil" placeholder="cédula">
+                            <input type="text" class="form-control" id="" name="" placeholder="cédula">
                         </div>
                         <div id="info-conductor" style="display: none;" class="alert alert-info mt-2"></div>
                         <button type="submit" class="btn btn-success w-100">Enviar</button>

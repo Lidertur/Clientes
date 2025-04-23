@@ -75,9 +75,6 @@
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Pasajeros</a>
-                </li>
-                <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=cliente">👪 Cliente</a>
                 </li>
                 <li class="nav-item">
@@ -85,6 +82,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=movil">🚌 Móviles</a>
                 </li>
             </ul>
         </div>

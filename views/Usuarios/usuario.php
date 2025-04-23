@@ -12,10 +12,12 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Usuarios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registros</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
             .sidebar {
@@ -29,30 +31,13 @@
                 padding-top: 50px;
                 z-index: 1050;
             }
-            @media (max-width: 992px) {
-                .sidebar {
-                    position: relative;
-                    width: 100%;
-                    height: auto;
-                    border-right: none;
-                }
-                .content {
-                    margin-left: 0;
-                }
-            }
             .content {
                 margin-top: 50px;
-                margin-left: 100px;
+                margin-left: 200px;
                 padding: 0px;
             }
-            @media (max-width: 992px) {
-                .content {
-                    margin-left: 0;
-                    padding: 10px;
-                }
-            }
             .cuadro{
-                margin-left: 70px;
+                margin-left: 50px;
             }
         </style>
     </head>
@@ -68,14 +53,20 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-                <li class="nav-item">
+            <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Pasajeros</a>
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=cliente">👪 Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=ruta">👪 Rutas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
                 </li>
             </ul>
         </div>
@@ -87,49 +78,48 @@
                         <img src="img/Logo.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
                     </div>
                     <div class="container mt-5">
-                        <h1 class="text-center">Inventario Usuarios</h1>
+                        <h1 class="text-center">Base de Usuarios</h1>
                         <a class="btn btn-success mb-4 float-end" href= "?c=usuario&a=Formcrear">Agregar</a>
                         <div class="table-responsive">
                             <table id="usuario" class="table table-striped table-bordered nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>Acciones</th>
-                                        <th>id_U</th>
-                                        <th>documento</th>
-                                        <th>nombre</th>
-                                        <th>apellido</th>
-                                        <th>telefono</th>
-                                        <th>correo</th>
-                                        <th>direccion></th>
-                                        <th>cargo</th>
-                                        <th>Base</th>
-                                        <th>zona</th>
-                                        <th>psl</th>
+                                        <th>ACCIONES</th>
+                                        <th>ID</th>
+                                        <th>DOCUMENTO</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>TELÉFONO</th>
+                                        <th>CORREO</th>
+                                        <th>DIRECCIÓN</th>
+                                        <th>CARGO</th>
+                                        <th>BASE</th>
+                                        <th>ZONA</th>
+                                        <th>PSL</th>
                                         <th>id_C</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                              
-                                        <?php foreach ($this->Registro->listar() as $Registro): ?>
-                                            <tr>
-                                                <td>
-                                                    <a href="?c=usuario&a=Formcrear&id_U=<?= $usuario['id_U']; ?>" class="btn btn-warning btn-sm" title="Editar">✏️</a>
-                                                    <a href="?c=usuario&a=Borrar&id_U=<?= $usuario['id_U']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este usuario?')" title="Eliminar">🗑️</a>
-                                                </td>
-                                                <td><?=$registro['id_U'] ?></td>
-                                                <td><?=$registro['documento'] ?></td>
-                                                <td><?=$registro['nombre'] ?></td>
-                                                <td><?=$registro['apellido'] ?></td>
-                                                <td><?=$registro['telefono'] ?></td>
-                                                <td><?=$registro['correo'] ?></td>
-                                                <td><?=$registro['direccion'] ?></td>
-                                                <td><?=$registro['cargo'] ?></td>
-                                                <td><?=$registro['Base'] ?></td>
-                                                <td><?=$registro['zona'] ?></td>
-                                                <td><?=$registro['psl'] ?></td>
-                                                <td><?=$registro['id_C'] ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                <?php foreach ($this->usuario->listar() as $usuario): ?>
+                                    <tr>
+                                        <td>
+                                            <a href="?c=usuario&a=Formcrear&id_U=<?= $usuario['id_U']; ?>" class="btn btn-warning btn-sm" title="Editar">✏️</a>
+                                            <a href="?c=usuario&a=Borrar&id_U=<?= $usuario['id_U']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este usuario?')" title="Eliminar">🗑️</a>
+                                        </td>
+                                        <td><?= $usuario['id_U'] ?></td>
+                                        <td><?= $usuario['documento'] ?></td>
+                                        <td><?= $usuario['nombre'] ?></td>
+                                        <td><?= $usuario['apellido'] ?></td>
+                                        <td><?= $usuario['telefono'] ?></td>
+                                        <td><?= $usuario['correo'] ?></td>
+                                        <td><?= $usuario['direccion'] ?></td>
+                                        <td><?= $usuario['cargo'] ?></td>
+                                        <td><?= $usuario['Base'] ?></td>
+                                        <td><?= $usuario['zona'] ?></td>
+                                        <td><?= $usuario['psl'] ?></td>
+                                        <td><?= $usuario['id_C'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -143,9 +133,9 @@
         <script>
             // Inicialización de DataTables con soporte para desplazamiento horizontal
             $(document).ready(function () {
-                $('#usuarios').DataTable({
+                $('#usuario').DataTable({
                     scrollX: true, // Habilita el desplazamiento horizontal
-                    responsive: true, // Hace la tabla adaptable
+                    responsive: false, // Hace la tabla adaptable
                     language: {
                         url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json" // Traducción al español
                     }

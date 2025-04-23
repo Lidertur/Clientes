@@ -12,10 +12,13 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registros</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
             .sidebar {
@@ -42,7 +45,7 @@
             }
             .content {
                 margin-top: 50px;
-                margin-left: 100px;
+                margin-left: 200px;
                 padding: 0px;
             }
             @media (max-width: 992px) {
@@ -68,14 +71,20 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
+            <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Pasajeros</a>
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=cliente">👪 Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=ruta">👪 Rutas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
                 </li>
             </ul>
         </div>
@@ -87,31 +96,27 @@
                         <img src="img/Logo.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
                     </div>
                     <div class="container mt-5">
-                        <h1 class="text-center">Inventario Registros</h1>
+                        <h1 class="text-center">Inventario rutas</h1>
+                        <a class="btn btn-success mb-4 float-end" href= "?c=usuario&a=Formcrear">Agregar</a>
                         <div class="table-responsive">
-                            <table id="registro" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <table id="ruta" class="table table-striped table-bordered nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th>acciones</th>
                                         <th>Id</th>
-                                        <th>Fecha</th>
-                                        <th>Hora</th>
-                                        <th>Documento</th>
-                                        <th>Usuario</th>
-                                        <th>Ruta</th>
-                                        <th>Movil</th>
+                                        <th>nombre</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                               
-                                        <?php foreach ($this->Registro->listar() as $Registro): ?>
+                                        <?php foreach ($this->ruta->listar() as $ruta): ?>
                                             <tr>
-                                                <td><?=$registro['id_RE'] ?></td>
-                                                <td><?=$registro['fecha'] ?></td>
-                                                <td><?=$registro['hora'] ?></td>
-                                                <td><?=$registro['documento'] ?></td>
-                                                <td><?=$registro['id_U'] ?></td>
-                                                <td><?=$registro['id_R'] ?></td>
-                                                <td><?=$registro['id_M'] ?></td>
+                                            <td>
+                                            <a href="?c=ruta&a=Formcrear&id_R=<?= $ruta['id_R']; ?>" class="btn btn-warning btn-sm" title="Editar">✏️</a>
+                                            <a href="?c=ruta&a=Borrar&id_R=<?= $ruta['id_R']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este usuario?')" title="Eliminar">🗑️</a>
+                                        </td>
+                                                <td><?=$ruta['id_R'] ?></td>
+                                                <td><?=$ruta['nombre'] ?></td>                                            
                                             </tr>
                                         <?php endforeach; ?>
                                 </tbody>
@@ -127,7 +132,7 @@
         <script>
             // Inicialización de DataTables con soporte para desplazamiento horizontal
             $(document).ready(function () {
-                $('#Registro').DataTable({
+                $('#ruta').DataTable({
                     scrollX: true, // Habilita el desplazamiento horizontal
                     responsive: true, // Hace la tabla adaptable
                     language: {

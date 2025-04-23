@@ -7,16 +7,19 @@ include('models/Cliente.php');
 include('models/Movil.php');
 class LoginControllers {
     private $administrador;
-    private $Ruta;
+    private $ruta;
     private $Cliente;
     private $movil;
     public function __construct() {
         $this->administrador = new Administrador();
-        $this->Ruta = new Ruta();
+        $this->ruta = new Ruta();
         $this->Cliente = new Cliente();
         $this->movil = new movil();
     }
     public function index() {
+        
+        $ruta = $this->ruta->listar();      // Obtener las rutas
+        $movil = $this->movil->listarr();
         require_once 'views/Login.php';
     }
 
@@ -65,29 +68,23 @@ class LoginControllers {
                 }
     
             } elseif ($role === 'Ruta') {
-                $nombre = $_POST['nombre'] ?? '';
-                $contraseña = $_POST['ruta_contraseña'] ?? '';
-                $movil = $this->movil->listar(); 
+                $id_R = $_POST['ruta'] ?? '';
                 $id_M = $_POST['movil'] ?? '';
             
-                if (empty($nombre) || empty($contraseña) || empty($id_M)) {
-                    $error = 'Por favor, complete todos los campos de ruta.';
+                if (empty($id_R) || empty($id_M)) {
+                    $error = 'Por favor, seleccione una ruta y un móvil.';
                 } else {
-                    $ruta = $this->Ruta->autenticar($nombre, $contraseña);
+                    $ruta = $this->ruta->obtenerPorId($id_R); // Asegúrate de tener este método en tu modelo
                     if ($ruta) {
                         $_SESSION['user'] = $ruta;
                         $_SESSION['role'] = 'Ruta';
-                        $_SESSION['id_M'] = $id_M; // <-- guardar el ID del móvil
-                        header('Location: ?c=homeR');
+                        $_SESSION['id_M'] = $id_M;
+                        header('Location: ?c=homer');
                         exit;
                     } else {
-                        $error = 'Credenciales de ruta incorrectas.';
+                        $error = 'La ruta seleccionada no es válida.';
                     }
-                }            
-    
-            } else {
-                $error = 'Tipo de usuario no válido.';
-            }
+                }
     
             // Cargar la vista de login nuevamente con error
             require_once 'views/Login.php';
@@ -96,4 +93,5 @@ class LoginControllers {
         }
     }
     
+}
 }

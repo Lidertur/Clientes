@@ -12,13 +12,12 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registros</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
@@ -33,39 +32,14 @@
                 padding-top: 50px;
                 z-index: 1050;
             }
-            @media (max-width: 992px) {
-                .sidebar {
-                    position: relative;
-                    width: 100%;
-                    height: auto;
-                    border-right: none;
-                }
-                .content {
-                    margin-left: 0;
-                }
-            }
             .content {
                 margin-top: 50px;
-                margin-left: 200px;
+                margin-left: 150px;
                 padding: 0px;
             }
-            @media (max-width: 992px) {
-                .content {
-                    margin-left: 0;
-                    padding: 10px;
-                }
-            }
             .cuadro{
-                margin-left: 70px;
+                margin-left: 50px;
             }
-            .table th {
-               text-align: center;
-            }
-            table.dataTable thead th {
-                text-align: center !important;
-                vertical-align: middle !important;
-            }
-            
         </style>
     </head>
     <body class="bg-light">
@@ -80,7 +54,7 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-                <li class="nav-item">
+            <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
@@ -105,56 +79,32 @@
                         <img src="img/Logo.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
                     </div>
                     <div class="container mt-5">
-                        <h1 class="text-center">Base de Registros</h1>
-                        <div class="d-flex align-items-end mb-3">
-                            <div style="margin-left: 20px;">
-                                <label for="startDate" class="form-label small">Fecha Inicio:</label>
-                                <input type="date" id="startDate" class="form-control form-control-sm" style="width: 150px;" />
-                            </div>
-                            <div style="margin-left: 100px;">
-                                <label for="endDate" class="form-label small">Fecha Fin:</label>
-                                <input type="date" id="endDate" class="form-control form-control-sm" style="width: 150px;" />
-                            </div>
-                            <div style="margin-left: 50px;">
-                                <a id="filterButton" class="btn btn-success">Filtrar</a>
-                            </div>
-                            <div style="margin-left: 400px;">
-                                <a class="btn btn-success" href="?c=preoperacional&a=EXCEL">
-                                    <i class="fas fa-file-download"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <h1 class="text-center">Inventario Usuarios</h1>
+                        <a class="btn btn-success mb-4 float-end" href= "?c=usuario&a=Formcrear">Agregar</a>
                         <div class="table-responsive">
-                        <table id="registro" class="table table-striped table-bordered" style="width:100%">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>FECHA</th>
-                                    <th>HORA</th>
-                                    <th>DOCUMENTO</th>
-                                    <th>PSL</th>
-                                    <th>USUARIO</th>
-                                    <th>RUTA</th>
-                                    <th>MOVIL</th>
-                                    <th>PLACA</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($this->registro->listar() as $registro): ?>
+                            <table id="movil" class="table table-striped table-bordered nowrap" style="width:100%">
+                                <thead class="table-dark">
                                     <tr>
-                                        <td><?=$registro['id_RE'] ?></td>
-                                        <td><?=$registro['fecha'] ?></td>
-                                        <td><?=$registro['hora'] ?></td>
-                                        <td><?=$registro['documento'] ?></td>
-                                        <td><?=$registro['PSL']?></td>
-                                        <td><?=$registro['nombre_usuario'] . ' ' . $registro['apellido']?></td>
-                                        <td><?=$registro['nombre_ruta'] ?></td>
-                                        <td><?=$registro['N_movil'] ?></td>
-                                        <td><?=$registro['placa'] ?></td>
+                                        <th>Acciones</th>
+                                        <th>ID</th>
+                                        <th>movil</th>
+                                        <th>placa</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($this->movil->listarr() as $movil): ?>
+
+                                    <tr>
+                                        <td>
+                                            <a href="?c=movil&a=Formcrear&id_M=<?= $movil['id_M']; ?>" class="btn btn-warning btn-sm" title="Editar">✏️</a>
+                                            <a href="?c=movil&a=Borrar&id_M=<?= $movil['id_M']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este movil?')" title="Eliminar">🗑️</a>
+                                        </td>
+                                        <td><?= $movil['id_M'] ?></td>
+                                        <td><?= $movil['N_movil'] ?></td>
+                                        <td><?= $movil['placa'] ?></td>
                                 <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -166,7 +116,7 @@
         <script>
             // Inicialización de DataTables con soporte para desplazamiento horizontal
             $(document).ready(function () {
-                $('#registro').DataTable({
+                $('#movil').DataTable({
                     scrollX: true, // Habilita el desplazamiento horizontal
                     responsive: true, // Hace la tabla adaptable
                     language: {

@@ -11,9 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     
 </head>
 <body class="bg-light">
@@ -73,35 +71,33 @@
                     </div>
                 </div>
 
-                <!-- Campos para Ruta -->
+                <!-- Campos para ruta -->
                 <div id="RutaFields" style="display: none;">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                    </div>
-                    <h5 class="mb-2">Seleccione movil</h5>
-                    <select id="movil" name="movil" class="form-control" required>
-                        <?php foreach ($moviles as $movil): ?>
-                            <option value="<?= $movil->id_M; ?>">
-                                <?= htmlspecialchars($movil->N_movil); ?>
+                    <h5 class="mb-2">Seleccione ruta</h5>
+                    <select id="ruta" name="ruta" class="form-control" required>
+                        <?php foreach ($ruta as $r): ?>
+                            <option value="<?= $r['id_R']; ?>">
+                                <?= htmlspecialchars($r['nombre']); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
-                    <div class="mb-3">
-                        <label for="contraseña" class="form-label">Contraseña</label>
-                        <div class="input-group">
-                        <input type="password" class="form-control" id="ruta_contraseña" name="contraseña">
-                            <button class="btn btn-outline-secondary" type="button" id="toggleRutaPassword">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <h5 class="mb-2">Seleccione movil</h5>
+                    <select id="movil" name="movil" class="form-control" required>
+                        <?php foreach ($movil as $m): ?>
+                            <option value="<?= $m['id_M']; ?>">
+                                <?= htmlspecialchars($m['N_movil']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">Iniciar sesión</button>
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
     function setupPasswordToggle(toggleId, inputId) {
         const toggle = document.getElementById(toggleId);
@@ -163,6 +159,11 @@
         $(document).ready(function() {
             $("#movil").select2({
                 placeholder: "🔍 Busca y selecciona un móvil...",
+                allowClear: true,
+                width: "100%"
+            });
+            $("#ruta").select2({
+                placeholder: "🔍 Busca una ruta...",
                 allowClear: true,
                 width: "100%"
             });

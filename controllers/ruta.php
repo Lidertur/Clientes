@@ -1,23 +1,23 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-include('models/Registro.php');
-class RegistroControllers {
-    private $registro;
+include('models/Ruta.php');
+class RutaControllers {
+    private $ruta;
     public function __construct() {
-        $this->registro = new Registro();
+        $this->ruta = new Ruta();
     }
     public function index() {
-        require_once 'views/Registros/registro.php';
+        require_once 'views/Ruta/ruta.php';
     }
     public function Formcrear(){
         $titulo="Registrar";
-        $p=new Registro;
+        $p=new Ruta;
         if(isset($_GET['id_RE'])){
-            $p=$this->registro->obtener($_GET['id_RE']);
+            $p=$this->ruta->obtener($_GET['id_RE']);
             $titulo="Actualizar";
         }
-        require_once('views/Cliente/cregistro.php');
+        require_once('views/Ruta/cruta.php');
     }
     public function Crear(){
         try{    
@@ -34,9 +34,9 @@ class RegistroControllers {
             $p->setid_M($_POST['id_M']);
 
             if ($p->getid_RE() > 0) {
-                $this->registro->actualizar($p);
+                $this->ruta->actualizar($p);
             } else {
-                $this->registro->crear($p);
+                $this->ruta->crear($p);
             }
             header('location:?c=conductor');
         }catch(Exception $e){

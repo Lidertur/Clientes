@@ -19,16 +19,25 @@
         public function getN_movil(): ?string { return $this->N_movil; }
         public function getplaca(): ?string { return $this->placa; }
 
-        public function setid_A($id_M) { $this->id_M = $id_M; }
+        public function setid_M($id_M) { $this->id_M = $id_M; }
         public function setplaca(string $placa) { $this->placa = $placa; }
         public function setN_movil(string $N_movil) { $this->N_movil = $N_movil; }
     
+        public function listarr(){
+            try {
+                $consulta = $this->movil->prepare("SELECT * from movil;");
+                $consulta->execute();
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            }catch (Exception $e){
+                die($e->getMessage());
+            }
+        }
 
-    public function listar(){
+    public function listar($id_M){
         try {
-            $consulta = $this->movil->prepare("SELECT N_movil, placa from movil;");
-            $consulta->execute();
-            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $consulta = $this->movil->prepare("SELECT * FROM movil WHERE id_M = ?");
+            $consulta->execute([$id_M]);
+            return $consulta->fetch(PDO::FETCH_ASSOC);
         }catch (Exception $e){
             die($e->getMessage());
         }

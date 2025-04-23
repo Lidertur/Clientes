@@ -16,6 +16,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registros</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
             .sidebar {
@@ -42,7 +45,7 @@
             }
             .content {
                 margin-top: 50px;
-                margin-left: 100px;
+                margin-left: 200px;
                 padding: 0px;
             }
             @media (max-width: 992px) {
@@ -72,10 +75,10 @@
                     <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=registroC">👷 Registros</a>
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuarioC">👪 Pasajeros</a>
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
                 </li>
             </ul>
         </div>
@@ -89,7 +92,7 @@
                     <div class="container mt-5">
                         <h1 class="text-center">Inventario Registros</h1>
                         <div class="table-responsive">
-                            <table id="registro" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <table id="registro" class="table table-striped table-bordered" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>Id</th>
@@ -103,7 +106,7 @@
                                 </thead>
                                 <tbody>
                               
-                                        <?php foreach ($this->Registro->listar() as $Registro): ?>
+                                        <?php foreach ($this->registro->listar() as $registro): ?>
                                             <tr>
                                                 <td><?=$registro['id_RE'] ?></td>
                                                 <td><?=$registro['fecha'] ?></td>
@@ -127,7 +130,7 @@
         <script>
             // Inicialización de DataTables con soporte para desplazamiento horizontal
             $(document).ready(function () {
-                $('#Registro').DataTable({
+                $('#registro').DataTable({
                     scrollX: true, // Habilita el desplazamiento horizontal
                     responsive: true, // Hace la tabla adaptable
                     language: {

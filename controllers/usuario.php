@@ -3,21 +3,22 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include('models/Usuario.php');
 class UsuarioControllers {
-    private $Usuario;
+    private $usuario;
     public function __construct() {
-        $this->Usuario = new Usuario();
+        $this->usuario = new Usuario();
     }
     public function index() {
-        require_once 'views/Cliente/Usuario.php';
+        require_once 'views/Usuarios/usuario.php';
+
     }
     public function Formcrear(){
         $titulo="Registrar";
         $p=new Usuario;
         if(isset($_GET['id_U'])){
-            $p=$this->Usuario->obtener($_GET['id_U']);
+            $p=$this->usuario->obtener($_GET['id_U']);
             $titulo="Actualizar";
         }
-        require_once('views/conductor/agregarc.php');
+        require_once('views/Usuarios/cusuario.php');
     }
     public function crear(){
         try{    
@@ -39,9 +40,9 @@ class UsuarioControllers {
             $p->setid_C($_POST['id_C']);
 
             if ($p->getid_U() > 0) {
-                $this->Usuario->Actualizar($p);
+                $this->usuario->Actualizar($p);
             } else {
-                $this->Usuario->crear($p);
+                $this->usuario->crear($p);
             }
             header('location:?c=conductor');
         }catch(Exception $e){
