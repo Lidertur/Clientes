@@ -37,12 +37,30 @@
 
         public function listar(){
             try{
-                $consulta =$this->registro->prepare("SELECT RE.*,R.nombre AS nombre_ruta, M.N_movil, M.placa, U.nombre AS nombre_usuario, U.apellido, U.psl AS PSL
-FROM registro RE INNER JOIN ruta R ON RE.id_R = R.id_R INNER JOIN movil M ON RE.id_M = M.id_M INNER JOIN usuario U ON RE.id_U = U.id_U;");
+                $consulta =$this->registro->prepare("SELECT RE.*,R.nombre AS nombre_ruta, M.N_movil, M.placa, U.nombre AS nombre_usuario, U.apellido, U.psl AS PSL, U.costo as costo
+                FROM registro RE INNER JOIN ruta R ON RE.id_R = R.id_R INNER JOIN movil M ON RE.id_M = M.id_M INNER JOIN usuario U ON RE.id_U = U.id_U;");
                 $consulta->execute();
                 return $consulta->fetchAll(PDO::FETCH_ASSOC);
             }catch (exception $e){
                 die ($e->getMessage());
             }
         }
+        public function listarPorFecha($startDate, $endDate){
+            try {
+                $consulta = $this->registro->prepare("
+                    SELECT RE.*, R.nombre AS nombre_ruta, M.N_movil, M.placa, 
+                           U.nombre AS nombre_usuario, U.apellido, U.psl AS PSL, U.costo as costo
+                    FROM registro RE
+                    INNER JOIN ruta R ON RE.id_R = R.id_R
+                    INNER JOIN movil M ON RE.id_M = M.id_M
+                    INNER JOIN usuario U ON RE.id_U = U.id_U
+                    WHERE RE.fecha BETWEEN ? AND ?
+                ");
+                $consulta->execute([$startDate, $endDate]);
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        
     }

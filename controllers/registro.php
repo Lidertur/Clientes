@@ -10,37 +10,25 @@ class RegistroControllers {
     public function index() {
         require_once 'views/Registros/registro.php';
     }
-    public function Formcrear(){
-        $titulo="Registrar";
-        $p=new Registro;
-        if(isset($_GET['id_RE'])){
-            $p=$this->registro->obtener($_GET['id_RE']);
-            $titulo="Actualizar";
-        }
-        require_once('views/Cliente/cregistro.php');
+    PUBLIC function EXCEL(){
+        require_once 'views/Registros/EXCEL.php';
     }
-    public function Crear(){
-        try{    
-            $p=new Registro();
-
-            if (!empty($_POST['id_RE'])){
-                $p->setid_RE((int)$_POST['id_RE']);
+    public function filtrarFechas() {
+        try {
+            $startDate = $_POST['startDate'] ?? null;
+            $endDate = $_POST['endDate'] ?? null;
+    
+            if (!$startDate || !$endDate) {
+                echo json_encode([]);
+                return;
             }
-            $p->setfecha($_POST['fecha']);
-            $p->sethora($_POST['hora']);
-            $p->setdocumento($_POST['documento']);
-            $p->setid_U($_POST['id_U']);
-            $p->setid_R($_POST['id_R']);
-            $p->setid_M($_POST['id_M']);
-
-            if ($p->getid_RE() > 0) {
-                $this->registro->actualizar($p);
-            } else {
-                $this->registro->crear($p);
-            }
-            header('location:?c=conductor');
-        }catch(Exception $e){
-            die($e->getMessage());
+    
+            $registros = $this->registro->listarPorFecha($startDate, $endDate);
+            echo json_encode($registros);
+        } catch (Exception $e) {
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
+    
+    
 }

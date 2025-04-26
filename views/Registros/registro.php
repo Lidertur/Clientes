@@ -87,9 +87,6 @@
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=cliente">👪 Cliente</a>
-                </li>
-                <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=ruta">👪 Rutas</a>
                 </li>
                 <li class="nav-item">
@@ -121,8 +118,11 @@
                             <div style="margin-left: 50px;">
                                 <a id="filterButton" class="btn btn-success">Filtrar</a>
                             </div>
+                            <div style="margin-left: 20px;">
+                                <a id="clearFilterButton" class="btn btn-secondary">Quitar Filtro</a>
+                            </div>
                             <div style="margin-left: 400px;">
-                                <a class="btn btn-success" href="?c=preoperacional&a=EXCEL">
+                                <a class="btn btn-success" href="?c=registro&a=EXCEL">
                                     <i class="fas fa-file-download"></i>
                                 </a>
                             </div>
@@ -176,6 +176,62 @@
                         url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json" // Traducción al español
                     }
                 });
+            });
+        </script>
+        <script>
+            document.getElementById('filterButton').addEventListener('click', function() {
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+
+                fetch('?c=registro&a=filtrarFechas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `startDate=${startDate}&endDate=${endDate}`
+                })
+                .then(response => response.json())
+                .then(data => actualizarTabla(data))
+                .catch(error => console.error('Error:', error));
+            });
+
+            // Nuevo botón para quitar el filtro
+            document.getElementById('clearFilterButton').addEventListener('click', function() {
+                document.getElementById('startDate').value = '';
+                document.getElementById('endDate').value = '';
+
+                fetch('?c=registro&a=listar', { // Llama el método que trae todo
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => actualizarTabla(data))
+                .catch(error => console.error('Error:', error));
+            });
+
+            // Función para actualizar la tabla
+            function actualizarTabla(data) {
+                const tbody = document.querySelector('#registro tbody');
+                tbody.innerHTML = '';
+
+                if (Array.isArray(data)) {
+                    data.forEach(registro => {
+                        const fila = `<tr>
+                            <td>${registro.id_RE}</td>
+                            <td>${registro.fecha}</td>
+                            <td>${registro.hora}</td>
+                            <td>${registro.documento}</td>
+                            <td>${registro.PSL}</td>
+                            <td>${registro.nombre_usuario} ${registro.apellido}</td>
+                            <td>${registro.nombre_ruta}</td>
+                            <td>${registro.N_movil}</td>
+                            <td>${registro.placa}</td>
+                        </tr>`;
+                        tbody.innerHTML += fila;
+                    });
+                }
+            }
+        </script>
+        <script>
+            document.getElementById('clearFilterButton').addEventListener('click', function() {
+                location.reload(); // Refresca la página completica
             });
         </script>
     </body>
