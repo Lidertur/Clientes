@@ -71,8 +71,8 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-            <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
@@ -86,6 +86,9 @@
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=movil">🚌 Móviles</a>
+                </li>
             </ul>
         </div>
         <!--     Main Content -->
@@ -97,7 +100,7 @@
                     </div>
                     <div class="container mt-5">
                         <h1 class="text-center">Inventario rutas</h1>
-                        <a class="btn btn-success mb-4 float-end" href= "?c=usuario&a=Formcrear">Agregar</a>
+                        <a class="btn btn-success mb-4 float-end" href= "?c=ruta&a=Formcrear">Agregar</a>
                         <div class="table-responsive">
                             <table id="ruta" class="table table-striped table-bordered nowrap" style="width:100%">
                                 <thead class="table-dark">

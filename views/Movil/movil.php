@@ -54,8 +54,8 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-            <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
@@ -69,6 +69,9 @@
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=movil">🚌 Móviles</a>
+                </li>
             </ul>
         </div>
         <!--     Main Content -->
@@ -79,8 +82,8 @@
                         <img src="img/Logo.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
                     </div>
                     <div class="container mt-5">
-                        <h1 class="text-center">Inventario Usuarios</h1>
-                        <a class="btn btn-success mb-4 float-end" href= "?c=usuario&a=Formcrear">Agregar</a>
+                        <h1 class="text-center">Base móviles</h1>
+                        <a class="btn btn-success mb-4 float-end" href= "?c=movil&a=Formcrear">Agregar</a>
                         <div class="table-responsive">
                             <table id="movil" class="table table-striped table-bordered nowrap" style="width:100%">
                                 <thead class="table-dark">

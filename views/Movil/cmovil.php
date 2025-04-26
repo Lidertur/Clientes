@@ -15,7 +15,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agregar Conductor</title>
+        <title><?=$titulo?> movil</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
@@ -107,65 +107,21 @@
                     <!-- Form -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
-                            <h2 class="text-center mb-4"><?=$titulo ?> Usuario</h2>
-                            <form method="POST" action="?c=usuario&a=<?= !empty($p->getid_U()) ? 'actualizar' : 'crear' ?>">
-
+                            <h2 class="text-center mb-4"><?=$titulo ?> Movil</h2>
+                            <form method="POST" action="?c=movil&a=<?= !empty($p->getid_M()) ? 'actualizar': 'crear' ?>">
                                 <div class="mb-3">
-                                    <input name="id_U" type="hidden" value="<?= $p->getid_U() ?? '' ?>">
+                                    <input name="id_M" type="hidden" value="<?= $p->getid_M() ?? '' ?>">
+                                </div>                        
+                                <div class="mb-3">
+                                    <label for="N_movil" class="form-label">número de móvil</label>
+                                    <input type="number" class="form-control" name="N_movil" id="N_movil" value="<?=$p->getN_movil();?>" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="documento" class="form-label">Número de Identificación</label>
-                                    <input type="number" class="form-control" name="documento" id="documento" value="<?=$p->getdocumento();?>" min="0" max="9999999999" required
-                                    oninput="this.value = this.value.slice(0, 10)"/>
-                                </div>                             
-                                <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre"placeholder="Nombre" value="<?=$p->getNombre();?>" pattern="[a-zA-Z\s]+" required>
+                                    <label for="placa" class="form-label">Placa</label>
+                                    <input type="text" class="form-control" name="placa" id="placa" value="<?=$p->getplaca();?>" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="apellido" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="<?=$p->getApellido(); ?>" pattern="[a-zA-Z\s]+" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="number" class="form-control"  name="telefono" id="telefono" placeholder="Teléfono" value="<?=$p->gettelefono(); ?>" min="0" max="9999999999" required
-                                    oninput="this.value = this.value.slice(0, 10)"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="correo" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo" value="<?=$p->getcorreo(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">direccion</label>
-                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Direccion" value="<?= $p->getdireccion(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="cargo" class="form-label">Cargo</label>
-                                    <input type="text" class="form-control" name="cargo" id="cargo"placeholder="Cargo" value="<?= $p->getcargo(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="base" class="form-label">Base</label>
-                                    <input type="text" class="form-control" name="base" id="base" placeholder="Base" value="<?= $p->getbase(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="zona" class="form-label">Zona</label>
-                                    <input type="text" class="form-control" name="zona" id="zona" placeholder="Zona" value="<?= $p->getzona(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="psl" class="form-label">PSL</label>
-                                    <input type="text" class="form-control" name="psl" id="psl" placeholder="PSL" value="<?= $p->getpsl(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="costo" class="form-label">C. Costo</label>
-                                    <input type="text" class="form-control" name="costo" id="costo" placeholder="costo" value="<?= $p->getcosto(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="id_C" class="form-label">Cliente</label>
-                                    <input type="text" class="form-control" name="id_C" id="id_C" placeholder="id_C" value="<?= $p->getid_C(); ?>" required>
-                                </div>
-
-                                <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Usuario</button>
-                                <a class="btn btn-dark w-100" href="?c=usuario" >Volver a usuarios</a>
+                                <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Móvil</button>
+                                <a class="btn btn-dark w-100" href="?c=movil" >Volver a Móviles</a>
                             </form>
                         </div>
                     </div>

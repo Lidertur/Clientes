@@ -15,7 +15,7 @@
             $this->movil = basedeDatos::conectar();
         }
         // Getters and setters
-        public function id_M() { return $this->id_M; }
+        public function getid_M() { return $this->id_M; }
         public function getN_movil(): ?string { return $this->N_movil; }
         public function getplaca(): ?string { return $this->placa; }
 
@@ -32,15 +32,64 @@
                 die($e->getMessage());
             }
         }
-
-    public function listar($id_M){
-        try {
-            $consulta = $this->movil->prepare("SELECT * FROM movil WHERE id_M = ?");
-            $consulta->execute([$id_M]);
-            return $consulta->fetch(PDO::FETCH_ASSOC);
-        }catch (Exception $e){
-            die($e->getMessage());
+        public function listar($id_M){
+            try {
+                $consulta = $this->movil->prepare("SELECT * FROM movil WHERE id_M = ?");
+                $consulta->execute([$id_M]);
+                return $consulta->fetch(PDO::FETCH_ASSOC);
+            }catch (Exception $e){
+                die($e->getMessage());
+            }
         }
-    }
+        public function crear(movil $p){
+            try{
+                $consulta="INSERT INTO movil ( N_movil, placa)
+                VALUES (?,?);";
+                $this->movil->prepare($consulta)
+                ->execute(array(
+                    $p->getN_movil(),
+                    $p->getplaca(),
+                ));
+            } catch(Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        public function obtener($movil){
+            try{
+                $consulta = $this->movil->prepare("SELECT * from movil where id_M = ?;");
+                $consulta->execute(array($movil));
+                $r=$consulta->fetch(PDO::FETCH_OBJ);
+                $p= new movil();
+                $p->setN_movil($r->N_movil);
+                $p->setplaca($r->placa);
+                $p->setid_M($r->id_M);
+                return $p;
+            }catch(Exception $e){
+                die($e->getMessage());
+            }
+        }
+        public function actualizar(movil $p){
+            try {
+                $consulta ="UPDATE movil SET
+                N_movil=?, placa=?
+                where id_M=?;";
+                $this->movil->prepare($consulta)
+                ->execute([
+                    $p->getN_movil(),
+                    $p->getplaca(),
+                    $p->getid_M()
+                ]);
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        public function eliminar($id_M) {
+            try {
+                $consulta ="DELETE FROM movil WHERE id_M=?;";
+                $this->movil->prepare($consulta)->execute(array($id_M));
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
 
     }

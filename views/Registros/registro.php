@@ -80,8 +80,8 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
+            <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
@@ -94,6 +94,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=movil">🚌 Móviles</a>
                 </li>
             </ul>
         </div>

@@ -15,7 +15,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agregar Conductor</title>
+        <title>Agregar Ruta</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
         <style>
@@ -76,14 +76,23 @@
         <!-- Sidebar -->
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
-                <li class="nav-item">
+            <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Pasajeros</a>
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=cliente">👪 Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=ruta">👪 Rutas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=usuario">👪 Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success nav-link text-black mb-5" href="?c=movil">🚌 Móviles</a>
                 </li>
             </ul>
         </div>
@@ -98,39 +107,18 @@
                     <!-- Form -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
-                            <h2 class="text-center mb-4"><?=$titulo ?> Conductor</h2>
-                            <form method="POST" action="?c=conductor&a=<?= $p->getID_Conductor() > 0 ? 'crear': 'crear' ?>">
+                            <h2 class="text-center mb-4"><?=$titulo ?> Ruta</h2>
+                            <form method="POST" action="?c=ruta&a=<?= !empty($p->getid_R()) ? 'actualizar': 'crear' ?>">
                                 <div class="mb-3">
-                                    <input name="ID_Conductor" type="hidden" value="<?= $p->getID_Conductor() ?? '' ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="cedula" class="form-label">Número de Identificación</label>
-                                    <input type="number" class="form-control" name="cedula" id="cedula" value="<?=$p->getcedula();?>" min="0" max="9999999999" required
-                                    oninput="this.value = this.value.slice(0, 10)"/>
-                                </div>                             
+                                    <input name="id_R" type="hidden" value="<?= $p->getid_R() ?? '' ?>">
+                                </div>                        
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$p->getNombre();?>" pattern="[a-zA-Z\s]+" required>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$p->getnombre();?>" pattern="[a-zA-Z\s]+" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="apellido" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="<?=$p->getApellido(); ?>" pattern="[a-zA-Z\s]+" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="number" class="form-control"  name="telefono" id="telefono" placeholder="Teléfono" value="<?=$p->gettelefono(); ?>" min="0" max="9999999999" required
-                                    oninput="this.value = this.value.slice(0, 10)"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="categoria" class="form-label">Categoría</label>
-                                    <input type="text" class="form-control" name="categoria" id="categoria" value="<?=$p->getcategoria(); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fechaVen" class="form-label">Fecha Vencimiento Licencia</label>
-                                    <input type="date" class="form-control" name="fechaVen" id="fechaVen" value="<?= $p->getfechaVen(); ?>" required>
-                                </div>
-                                <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Conductor</button>
-                                <a class="btn btn-dark w-100" href="?c=conductor" >Volver al inventario</a>
+                                
+                                <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Ruta</button>
+                                <a class="btn btn-dark w-100" href="?c=ruta" >Volver a Ruta</a>
                             </form>
                         </div>
                     </div>
