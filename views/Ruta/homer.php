@@ -46,22 +46,17 @@
         <!-- Main Content -->
         <div class="content">
             <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100" >
-                <div class="card mx-auto mb-3" style="max-width: 400px; box-shadow: 0 0 55px 1px #000000;">
-                    <div class="text-center mb-4">
-                        <img src="img/Logo.png" alt="Logo" class="img-fluid " style="max-width: 100px;">
-                    </div>
+                <form action="?c=homer&a=guardarRegistro" method="POST">
                     <div class="card-body text-center">
                         <h1 class="card-title text-success mb-4">
                             Bienvenido Ruta <?= htmlspecialchars($rutaSeleccionada); ?> - Móvil <?= htmlspecialchars($movilSeleccionado); ?>
                         </h1>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="" name="" placeholder="cédula">
+                            <input type="text" class="form-control" id="documento" name="documento" placeholder="Cédula" required>
                         </div>
-                        <div id="info-conductor" style="display: none;" class="alert alert-info mt-2"></div>
                         <button type="submit" class="btn btn-success w-100">Enviar</button>
-
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

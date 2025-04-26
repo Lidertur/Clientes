@@ -74,24 +74,28 @@ class LoginControllers {
                 if (empty($id_R) || empty($id_M)) {
                     $error = 'Por favor, seleccione una ruta y un móvil.';
                 } else {
-                    $ruta = $this->ruta->obtenerPorId($id_R); // Asegúrate de tener este método en tu modelo
+                    // Obtener la ruta por su ID
+                    $ruta = $this->ruta->obtenerPorId($id_R);
+            
                     if ($ruta) {
-                        $_SESSION['user'] = $ruta;
+                        session_start(); // Inicia la sesión si no está ya iniciada
+            
+                        // Guardar solo la información necesaria en la sesión
+                        $_SESSION['user'] = $ruta['nombre']; // O cualquier otro dato que necesites
                         $_SESSION['role'] = 'Ruta';
-                        $_SESSION['id_M'] = $id_M;
+                        $_SESSION['id_R'] = $id_R; // ID de la ruta
+                        $_SESSION['id_M'] = $id_M; // ID del móvil
+            
+                        // Redirigir a la página de bienvenida
                         header('Location: ?c=homer');
                         exit;
                     } else {
                         $error = 'La ruta seleccionada no es válida.';
+            
+                        // Cargar la vista de login nuevamente con error
+                        require_once 'views/Login.php';
                     }
                 }
-    
-            // Cargar la vista de login nuevamente con error
-            require_once 'views/Login.php';
-        } else {
-            header('Location: ?c=login');
-        }
-    }
-    
-}
-}
+            } else {
+                header('Location: ?c=login');
+            }}}}

@@ -62,5 +62,25 @@
                 die($e->getMessage());
             }
         }
+        public function buscarUsuarioPorDocumento($documento) {
+            try {
+                $consulta = $this->registro->prepare("SELECT id_U FROM usuario WHERE documento = ?");
+                $consulta->execute([$documento]);
+                return $consulta->fetch(PDO::FETCH_ASSOC);
+            } catch (Exception $e) {
+                die('Error al buscar usuario: ' . $e->getMessage());
+            }
+        } 
+        public function insertarRegistro($fecha, $hora, $documento, $id_U, $id_R, $id_M) {
+            try {
+                $consulta = $this->registro->prepare(
+                    "INSERT INTO registro (fecha, hora, documento, id_U, id_R, id_M) VALUES (?, ?, ?, ?, ?, ?)"
+                );
+                $consulta->execute([$fecha, $hora, $documento, $id_U, $id_R, $id_M]);
+            } catch (Exception $e) {
+                die('Error al insertar registro: ' . $e->getMessage());
+            }
+        }
+        
         
     }

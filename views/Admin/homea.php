@@ -69,7 +69,7 @@
         <div class="sidebar collapse d-lg-block" id="sidebarMenu">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homec">🏡 inicio</a>
+                    <a class="btn btn-success nav-link text-black mb-5 " href="?c=homea">🏡 inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-success nav-link text-black mb-5" href="?c=registro">👷 Registros</a>
@@ -95,9 +95,9 @@
                     <div class="card-body text-center">
                         <h1 class="card-title text-success mb-4">Bienvenido Administrador</h1>
                         <a class="btn btn-success btn-lg w-100 mb-3" href="?c=registro">Reistros</a>
-                        <a class="btn btn-success btn-lg w-100" href="?c=usuairios">Pasajeros</a>
+                        <a class="btn btn-success btn-lg w-100" href="?c=usuario">Pasajeros</a>
                         <a class="btn btn-success btn-lg w-100" href="?c=clientes">Clientes</a>
-                        <a class="btn btn-success btn-lg w-100" href="?c=usuairios">Rutas</a>
+                        <a class="btn btn-success btn-lg w-100" href="?c=ruta">Rutas</a>
                     </div>
                 </div>
             </div>
