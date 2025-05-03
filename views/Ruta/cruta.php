@@ -111,7 +111,7 @@
                                 </div>                        
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$p->getnombre();?>" pattern="[a-zA-Z\s]+" required>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$p->getnombre();?>" required>
                                 </div>
                                 
                                 <button type="submit" class="btn btn-success w-100 mb-2"><?=$titulo?> Ruta</button>

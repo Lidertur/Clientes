@@ -137,6 +137,7 @@
                                     <th>DOCUMENTO</th>
                                     <th>PSL</th>
                                     <th>USUARIO</th>
+                                    <th>COSTO</th>
                                     <th>RUTA</th>
                                     <th>MOVIL</th>
                                     <th>PLACA</th>
@@ -151,6 +152,7 @@
                                         <td><?=$registro['documento'] ?></td>
                                         <td><?=$registro['PSL']?></td>
                                         <td><?=$registro['nombre_usuario'] . ' ' . $registro['apellido']?></td>
+                                        <td><?=$registro['costo'] ?></td>
                                         <td><?=$registro['nombre_ruta'] ?></td>
                                         <td><?=$registro['N_movil'] ?></td>
                                         <td><?=$registro['placa'] ?></td>

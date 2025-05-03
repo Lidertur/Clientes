@@ -61,6 +61,7 @@ class HomerControllers {
                 $id_U = $usuario ? $usuario['id_U'] : 5; // Si no encuentra, id_U = 1
     
                 // Preparar fecha y hora actuales
+                date_default_timezone_set('America/Bogota');
                 $fecha = date('Y-m-d');
                 $hora = date('H:i:s');
     
