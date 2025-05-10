@@ -145,4 +145,17 @@
                 die($e->getMessage());
             }
         }
+        public function buscarDocumentosPorCoincidencia($documento) {
+            try {
+                $consulta = $this->usuario->prepare("SELECT documento FROM usuario WHERE documento LIKE CONCAT(:doc, '%') LIMIT 5");
+                $consulta->bindParam(":doc", $documento);
+                $consulta->execute();
+
+                return $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            } catch (PDOException $e) {
+                return [];
+            }
+        }
+
     }

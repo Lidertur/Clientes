@@ -4,14 +4,17 @@ ini_set("display_errors", 1);
 include('models/Ruta.php');
 include('models/Movil.php');
 include('models/Registro.php');
+include('models/Usuario.php');
 class HomerControllers {
     private $ruta;
     private $movil;
     private $registro;
+    private $usuario;
     public function __construct() {
         $this->ruta = new Ruta();
         $this->movil = new Movil();
         $this->registro = new registro();
+        $this->usuario = new usuario();
     }
     public function index() {
         session_start(); // Asegúrate de que la sesión esté iniciada
@@ -77,8 +80,21 @@ class HomerControllers {
             }
         }
     }
-    
-    
+        public function buscarDocumentoAjax() {
+        if (isset($_POST['documento'])) {
+            $documento = $_POST['documento'];
+            $resultados = $this->usuario->buscarDocumentosPorCoincidencia($documento);
+
+            if ($resultados && count($resultados) > 0) {
+                foreach ($resultados as $doc) {
+                    echo "<p class='sugerencia'>" . htmlspecialchars($doc['documento']) . "</p>";
+                }
+            } else {
+                echo "<p>No encontrado</p>";
+            }
+        }
+    }
+
     
     
 }

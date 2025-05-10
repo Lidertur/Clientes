@@ -52,7 +52,9 @@
                             Bienvenido Ruta <?= htmlspecialchars($rutaSeleccionada); ?> - Móvil <?= htmlspecialchars($movilSeleccionado); ?>
                         </h1>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="documento" name="documento" placeholder="Cédula" required>
+                            <input type="text" id="documento" name="documento" class="form-control" placeholder="Cédula">
+                            <div id="sugerencias"></div>
+                            <div id="resultados" class="mt-2"></div>
                         </div>
                         <button type="submit" class="btn btn-success w-100">Enviar</button>
                     </div>
@@ -60,33 +62,62 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
-                document.getElementById('documento').addEventListener('blur', function () {
-                    const cedula = this.value;
-                    if (cedula) {
-                        fetch('?c=home&a=obtenerDatosConductor', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: new URLSearchParams({ cedula })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            const infoDiv = document.getElementById('info-conductor');
-                            if (data.error) {
-                                infoDiv.style.display = 'block';
-                                infoDiv.className = 'alert alert-danger';
-                                infoDiv.textContent = data.error;
-                            } else {
-                                infoDiv.style.display = 'block';
-                                infoDiv.className = 'alert alert-info';
-                                infoDiv.innerHTML = `
-                                    <strong>Nombre:</strong> ${data.nombre} ${data.apellido}<br>
-                                `;
-                            }
-                        })
-                        .catch(err => console.error('Error:', err));
-                    }
+            document.getElementById('documento').addEventListener('blur', function () {
+                const cedula = this.value;
+                if (cedula) {
+                    fetch('?c=home&a=obtenerDatosConductor', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({ cedula })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const infoDiv = document.getElementById('info-conductor');
+                        if (data.error) {
+                            infoDiv.style.display = 'block';
+                            infoDiv.className = 'alert alert-danger';
+                            infoDiv.textContent = data.error;
+                        } else {
+                            infoDiv.style.display = 'block';
+                            infoDiv.className = 'alert alert-info';
+                            infoDiv.innerHTML = `
+                                <strong>Nombre:</strong> ${data.nombre} ${data.apellido}<br>
+                            `;
+                        }
+                    })
+                    .catch(err => console.error('Error:', err));
+                }
+            });
+        </script>
+        <script>
+        document.getElementById('documento').addEventListener('input', function() {
+            const valor = this.value;
+            if (valor.length > 0) {
+                fetch('?c=homer&a=buscarDocumentoAjax', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'documento=' + encodeURIComponent(valor)
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('sugerencias').innerHTML = html;
                 });
-            </script>
+            } else {
+                document.getElementById('sugerencias').innerHTML = '';
+            }
+        });
+        </script>
+        <script>
+        document.getElementById('sugerencias').addEventListener('click', function(e) {
+            if (e.target.classList.contains('sugerencia')) {
+                const valorSeleccionado = e.target.textContent;
+                document.getElementById('documento').value = valorSeleccionado;
+                document.getElementById('sugerencias').innerHTML = ''; // Limpiar sugerencias
+            }
+        });
+        </script>
     </body>
 </html>
